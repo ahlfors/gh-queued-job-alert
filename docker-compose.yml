@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  queued-job-alert:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gh-queued-job-alert
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - queued-job-alert-state:/app/state
+      - queued-job-alert-logs:/app/logs
+    healthcheck:
+      test: ["CMD", "pgrep", "crond"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  queued-job-alert-state:
+    driver: local
+  queued-job-alert-logs:
+    driver: local

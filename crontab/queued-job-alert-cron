@@ -1,0 +1,2 @@
+# Fallback — 实际由 entrypoint.sh 从环境变量 CHECK_CRON_SCHEDULE 动态生成
+*/3 * * * * /bin/bash -c 'source /app/state/container.env && /app/scripts/queued_job_alert.sh >> /app/logs/queued-job-alert.log 2>&1'

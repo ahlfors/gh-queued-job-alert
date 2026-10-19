@@ -1,0 +1,7 @@
+.env
+/gh-queued-job-alert
+dist/
+.idea/
+.vscode/
+.claude/
+.serena/
